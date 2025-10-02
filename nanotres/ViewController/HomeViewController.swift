@@ -183,7 +183,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
       let totalSpacing = spacing * 3 // se tiver 4 colunas, tem 3 espaços
       let availableWidth = collectionView.bounds.width - totalSpacing
       let width = availableWidth / 4
-      return CGSize(width: width, height: 80)
+      return CGSize(width: width, height: homeView.categoryCollectionView.frame.height)
     } else {
       return CGSize(width: 150, height: 200)
     }

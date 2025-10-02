@@ -11,6 +11,24 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
   static let reuseIdentifier: String = "CategoryCell"
   
+  // MARK: - Initializers
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    contentView.backgroundColor = .labelGray
+    contentView.layer.cornerRadius = 8
+    addSubviews()
+    setupConstraints()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  func configure(with category: Category){
+    profileImage.image = category.image
+    nameLabel.text = category.name
+  }
+  
   // MARK: - Subviews
   private(set) lazy var profileImage: UIImageView = {
     
@@ -32,48 +50,22 @@ class CategoryCell: UICollectionViewCell {
     return view
   }()
   
-  private lazy var stackView: UIStackView = {
-    let view = UIStackView(arrangedSubviews: [profileImage, nameLabel])
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.axis = .vertical
-    view.alignment = .center
-    view.spacing = 0
-    return view
-  }()
-  
-  // MARK: - Initializers
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    addSubviews()
-    setupConstraints()
-    backgroundColor = .labelGray
-    layer.cornerRadius = 12
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  func configure(with category: Category){
-    profileImage.image = category.image
-    nameLabel.text = category.name
-  }
-  
   // MARK: - Setup Methods
   private func addSubviews() {
-    addSubview(stackView)
+    contentView.addSubview(profileImage)
+    contentView.addSubview(nameLabel)
   }
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-      stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
-      stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-      stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+      profileImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+      profileImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      profileImage.heightAnchor.constraint(equalToConstant: 60),
+      profileImage.widthAnchor.constraint(equalToConstant: 60), // keep it square
       
-      profileImage.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
-      profileImage.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.8),
-      profileImage.heightAnchor.constraint(equalTo: profileImage.widthAnchor)
+      nameLabel.topAnchor.constraint(equalTo: profileImage.bottomAnchor),
+      nameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4)
     ])
   }
 }

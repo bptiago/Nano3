@@ -77,7 +77,7 @@ class HomeView: UIView {
       categoryCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
       categoryCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
       categoryCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-      categoryCollectionView.heightAnchor.constraint(equalToConstant: 100),
+      categoryCollectionView.heightAnchor.constraint(equalToConstant: 90),
 
       foodCollectionView.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 16),
       foodCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
