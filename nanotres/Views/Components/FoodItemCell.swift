@@ -81,19 +81,17 @@ class FoodItemCell: UICollectionViewCell {
   }
   
   private func addSubviews() {
-    addSubview(imageView)
-    addSubview(stack)
+    contentView.addSubview(imageView)
+    contentView.addSubview(stack)
   }
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      // imageView at top, fixed height
-      imageView.topAnchor.constraint(equalTo: topAnchor),
-      imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+      imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+      imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
       imageView.heightAnchor.constraint(equalToConstant: 120),
       
-      // nameLabel below image
       stack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
       stack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
       stack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),

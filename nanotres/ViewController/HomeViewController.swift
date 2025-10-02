@@ -185,7 +185,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
       let width = availableWidth / 4
       return CGSize(width: width, height: homeView.categoryCollectionView.frame.height)
     } else {
-      return CGSize(width: 150, height: 200)
+      return CGSize(width: 150, height: homeView.foodCollectionView.frame.height)
     }
   }
   
