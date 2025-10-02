@@ -54,7 +54,7 @@ class CategoryCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func setup(with category: Category){
+  func configure(with category: Category){
     profileImage.image = category.image
     nameLabel.text = category.name
   }

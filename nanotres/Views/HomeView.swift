@@ -25,6 +25,19 @@ class HomeView: UIView {
   }
   
   // MARK: - Subviews
+  let foodCollectionView: UICollectionView = {
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    
+    let view = UICollectionView(
+      frame: .zero,
+      collectionViewLayout: layout
+    )
+    view.translatesAutoresizingMaskIntoConstraints = false
+
+    return view
+  }()
+  
   let categoryCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
@@ -40,20 +53,10 @@ class HomeView: UIView {
     return view
   }()
   
-  private(set) lazy var mainStackView: UIStackView = {
-    let stack = UIStackView(
-      arrangedSubviews: [categoryCollectionView]
-    )
-    
-    stack.translatesAutoresizingMaskIntoConstraints = false
-    stack.axis = .vertical
-    
-    return stack
-  }()
-  
   // MARK: - SETUP
   private func addSubviews() {
-    addSubview(mainStackView)
+    addSubview(categoryCollectionView)
+    addSubview(foodCollectionView)
   }
   
   private func setupCollectionView() {
@@ -61,14 +64,25 @@ class HomeView: UIView {
       CategoryCell.self,
       forCellWithReuseIdentifier: CategoryCell.reuseIdentifier
     )
+    
+    foodCollectionView.register(
+      FoodItemCell.self,
+      forCellWithReuseIdentifier: FoodItemCell.reuseIdentifier
+    )
+    foodCollectionView.showsHorizontalScrollIndicator = false
   }
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      mainStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-      mainStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-      mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+      categoryCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+      categoryCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+      categoryCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+      categoryCollectionView.heightAnchor.constraint(equalToConstant: 100),
+
+      foodCollectionView.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 16),
+      foodCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+      foodCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      foodCollectionView.bottomAnchor.constraint(equalTo: foodCollectionView.topAnchor, constant: 200)
     ])
   }
 }
