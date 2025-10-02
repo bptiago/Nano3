@@ -12,11 +12,23 @@ class HomeViewController: UIViewController {
   
   private let homeView = HomeView()
   let searchController = UISearchController(searchResultsController: nil)
+  private let categories: [Category] = [
+    Category(name: "Tudo", image: UIImage(resource: .placeholder)),
+    Category(name: "Refeições", image: UIImage(resource: .placeholder)),
+    Category(name: "Lanches", image: UIImage(resource: .placeholder)),
+    Category(name: "Bebidas", image: UIImage(resource: .placeholder)),
+  ]
+  
+  override func loadView() {
+    super.loadView()
+    view = homeView
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view = homeView
     setupNavigationBar()
+    homeView.categoryCollectionView.dataSource = self
+    homeView.categoryCollectionView.delegate = self
   }
   
   private func setupNavigationBar() {
@@ -65,6 +77,46 @@ extension HomeViewController: UISearchBarDelegate {
     } completion: { _ in
       self.navigationItem.searchController = nil
     }
+  }
+  
+}
+
+extension HomeViewController: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    4
+  }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    cellForItemAt indexPath: IndexPath
+  ) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(
+      withReuseIdentifier: CategoryCell.reuseIdentifier,
+      for: indexPath
+    ) as? CategoryCell else {
+      fatalError("Could not dequeue cell")
+    }
+    
+    cell.setup(with: categories[indexPath.row])
+    
+    return cell
+  }
+  
+}
+
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let spacing: CGFloat = 8
+    let totalSpacing = spacing * 3 // se tiver 4 colunas, tem 3 espaços
+    let availableWidth = collectionView.bounds.width - totalSpacing
+    let width = availableWidth / 4
+    return CGSize(width: width, height: 80)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let vc = SearchController()
+    navigationController?.pushViewController(vc, animated: true)
   }
   
 }
