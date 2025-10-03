@@ -12,8 +12,6 @@ class HomeViewController: UIViewController {
   
   // MARK: - Properties
   private let homeView = HomeView()
-  let searchController = UISearchController(searchResultsController: nil)
-  
   private let categories: [Category] = [
     Category(name: "Tudo", image: UIImage(resource: .placeholder)),
     Category(name: "Refeições", image: UIImage(resource: .placeholder)),
@@ -71,7 +69,7 @@ class HomeViewController: UIViewController {
     )
   ]
   
-  // MARK: - Initializers
+  // MARK: - Lifecycle
   
   override func loadView() {
     super.loadView()
@@ -113,26 +111,8 @@ class HomeViewController: UIViewController {
   
   @objc
   private func didClickSearchButton() {
-    searchController.hidesNavigationBarDuringPresentation = true
-    searchController.searchBar.placeholder = "Pesquise aqui..."
-    searchController.searchBar.delegate = self
-    navigationItem.searchController = searchController
-    present(searchController, animated: true)
-  }
-  
-}
-
-extension HomeViewController: UISearchBarDelegate {
-  
-  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-    navigationItem.searchController?.dismiss(animated: true)
-    navigationItem.searchController?.isActive = false
-    
-    UIView.animate(withDuration: 0.5) {
-      self.searchController.searchBar.alpha = 1
-    } completion: { _ in
-      self.navigationItem.searchController = nil
-    }
+    let vc = SearchViewController()
+    navigationController?.pushViewController(vc, animated: true)
   }
   
 }
@@ -191,7 +171,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if collectionView == homeView.categoryCollectionView {
-      let vc = SearchController()
+      let vc = SearchViewController()
       navigationController?.pushViewController(vc, animated: true)
     } else {
 //      let vc = SearchController()
