@@ -19,56 +19,64 @@ class HomeViewController: UIViewController {
     Category(name: "Bebidas", image: UIImage(resource: .placeholder)),
   ]
   let foodItems: [FoodItem] = [
-    FoodItem(
-      image: UIImage(systemName: "fork.knife")!,
-      name: "Spaghetti Bolognese",
-      price: 32.90,
-      location: "Trattoria Bella Italia"
-    ),
-    FoodItem(
-      image: UIImage(systemName: "takeoutbag.and.cup.and.straw.fill")!,
-      name: "Cheeseburger Combo",
-      price: 24.50,
-      location: "Burger House"
-    ),
-    FoodItem(
-      image: UIImage(systemName: "cup.and.saucer.fill")!,
-      name: "Cappuccino",
-      price: 8.90,
-      location: "Café Central"
-    ),
-    FoodItem(
-      image: UIImage(systemName: "birthday.cake.fill")!,
-      name: "Chocolate Cake",
-      price: 15.00,
-      location: "Sweet Dreams Bakery"
-    ),
-    FoodItem(
-      image: UIImage(systemName: "leaf.fill")!,
-      name: "Vegan Salad",
-      price: 18.75,
-      location: "Green Bowl"
-    ),
-    FoodItem(
-      image: UIImage(systemName: "fish.fill")!,
-      name: "Grilled Salmon",
-      price: 42.00,
-      location: "Ocean View Restaurant"
-    ),
-    FoodItem(
-      image: UIImage(systemName: "wineglass.fill")!,
-      name: "Red Wine",
-      price: 27.50,
-      location: "Wine & Dine"
-    ),
-    FoodItem(
-      image: UIImage(systemName: "takeoutbag.and.cup.and.straw.fill")!,
-      name: "Sushi Combo",
-      price: 39.90,
-      location: "Tokyo Bites"
-    )
+      FoodItem(
+        image: UIImage(systemName: "fork.knife")!,
+        name: "Spaghetti Bolognese",
+        price: 32.90,
+        location: "Trattoria Bella Italia",
+        description: "Massa artesanal coberta com um molho de tomate encorpado e carne moída suculenta. Uma receita clássica italiana que abraça o paladar a cada garfada."
+      ),
+      FoodItem(
+        image: UIImage(systemName: "takeoutbag.and.cup.and.straw.fill")!,
+        name: "Cheeseburger Combo",
+        price: 24.50,
+        location: "Burger House",
+        description: "Hambúrguer suculento com queijo derretido, pão tostado e batatas douradas na medida certa. Um clássico que nunca decepciona."
+      ),
+      FoodItem(
+        image: UIImage(systemName: "cup.and.saucer.fill")!,
+        name: "Cappuccino",
+        price: 8.90,
+        location: "Café Central",
+        description: "Café espresso encorpado com leite vaporizado e espuma cremosa. Perfeito para acompanhar uma boa conversa ou começar o dia com estilo."
+      ),
+      FoodItem(
+        image: UIImage(systemName: "birthday.cake.fill")!,
+        name: "Chocolate Cake",
+        price: 15.00,
+        location: "Sweet Dreams Bakery",
+        description: "Bolo fofinho com camadas generosas de creme de chocolate e cobertura brilhante. Doce, intenso e impossível de resistir."
+      ),
+      FoodItem(
+        image: UIImage(systemName: "leaf.fill")!,
+        name: "Vegan Salad",
+        price: 18.75,
+        location: "Green Bowl",
+        description: "Uma mistura vibrante de folhas frescas, grãos, legumes grelhados e um toque cítrico. Leve, saudável e cheia de sabor."
+      ),
+      FoodItem(
+        image: UIImage(systemName: "fish.fill")!,
+        name: "Grilled Salmon",
+        price: 42.00,
+        location: "Ocean View Restaurant",
+        description: "Filé de salmão grelhado com crosta dourada, servido com legumes salteados e toque de limão. Um prato elegante e delicioso."
+      ),
+      FoodItem(
+        image: UIImage(systemName: "wineglass.fill")!,
+        name: "Red Wine",
+        price: 27.50,
+        location: "Wine & Dine",
+        description: "Vinho tinto encorpado com notas de frutas vermelhas e leve toque amadeirado. Ideal para harmonizar com carnes, massas ou bons momentos."
+      ),
+      FoodItem(
+        image: UIImage(systemName: "takeoutbag.and.cup.and.straw.fill")!,
+        name: "Sushi Combo",
+        price: 39.90,
+        location: "Tokyo Bites",
+        description: "Seleção de sushis e sashimis frescos preparados com precisão japonesa. Uma explosão de sabor e equilíbrio em cada peça."
+      )
   ]
-  
+
   // MARK: - Lifecycle
   
   override func loadView() {
@@ -174,9 +182,8 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
       let vc = SearchViewController()
       navigationController?.pushViewController(vc, animated: true)
     } else {
-//      let vc = SearchController()
-//      navigationController?.pushViewController(vc, animated: true)
+      let vc = ItemDetailViewController(foodItem: foodItems[indexPath.row])
+      navigationController?.pushViewController(vc, animated: true)
     }
   }
-  
 }

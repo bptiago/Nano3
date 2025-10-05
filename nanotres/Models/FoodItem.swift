@@ -14,4 +14,5 @@ struct FoodItem: Identifiable {
   let name: String
   let price: Double
   let location: String
+  let description: String
 }
