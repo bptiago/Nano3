@@ -36,10 +36,31 @@ class SearchViewController: UIViewController {
     self.navigationItem.standardAppearance = appearance
     self.navigationItem.scrollEdgeAppearance = appearance
     
-    searchController.searchBar.placeholder = "Pesquise aqui..."
-    searchController.searchBar.delegate = self
-    navigationItem.searchController = searchController
+//    searchController.searchBar.placeholder = "Pesquise aqui..."
+//    searchController.searchBar.delegate = self
+//    navigationItem.searchController = searchController
 //    present(searchController, animated: true)
+    
+    let filterButton = UIBarButtonItem(
+      image: UIImage(systemName: "line.3.horizontal.decrease")!,
+      style: .plain,
+      target: self,
+      action: #selector(didClickFilterButton)
+    )
+    filterButton.tintColor = .black
+    
+    navigationItem.rightBarButtonItem = filterButton
+  }
+  
+  @objc
+  private func didClickFilterButton() {
+    let vc = SortSheetViewController()
+    if let sheet = vc.sheetPresentationController {
+      sheet.detents = [.medium()]
+      sheet.prefersGrabberVisible = true
+    }
+    
+    present(vc, animated: true)
   }
 }
 
