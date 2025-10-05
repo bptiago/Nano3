@@ -27,7 +27,13 @@ class SearchView: UIView {
   let foodItemsCollection: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
-    layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+    
+    let width = UIScreen.main.bounds.width
+    let padding: CGFloat = 16
+    let totalSpacing = layout.minimumInteritemSpacing + (padding * 2)
+    let itemWidth = (width - totalSpacing) / 2
+
+    layout.itemSize = CGSize(width: itemWidth, height: 200)
     
     let view = UICollectionView(
       frame: .zero,

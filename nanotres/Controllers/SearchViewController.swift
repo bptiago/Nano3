@@ -89,10 +89,10 @@ class SearchViewController: UIViewController {
     self.navigationItem.standardAppearance = appearance
     self.navigationItem.scrollEdgeAppearance = appearance
     
-//    searchController.searchBar.placeholder = "Pesquise aqui..."
-//    searchController.searchBar.delegate = self
-//    navigationItem.searchController = searchController
-//    present(searchController, animated: true)
+    //    searchController.searchBar.placeholder = "Pesquise aqui..."
+    //    searchController.searchBar.delegate = self
+    //    navigationItem.searchController = searchController
+    //    present(searchController, animated: true)
     
     let filterButton = UIBarButtonItem(
       image: UIImage(systemName: "line.3.horizontal.decrease")!,
@@ -109,7 +109,9 @@ class SearchViewController: UIViewController {
   private func didClickFilterButton() {
     let vc = SortSheetViewController()
     if let sheet = vc.sheetPresentationController {
-      sheet.detents = [.medium()]
+      sheet.detents = [.custom(resolver: { context in
+        return 200
+      })]
       sheet.prefersGrabberVisible = true
     }
     
@@ -127,7 +129,11 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return categoryFilters.count
+    if collectionView == searchView.categoryFiltersCollection {
+      return categoryFilters.count
+    } else {
+      return foodItems.count
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
