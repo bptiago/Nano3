@@ -24,6 +24,20 @@ class SearchView: UIView {
   }
   
   // MARK: - Subviews
+  let foodItemsCollection: UICollectionView = {
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .vertical
+    layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+    
+    let view = UICollectionView(
+      frame: .zero,
+      collectionViewLayout: layout
+    )
+    view.translatesAutoresizingMaskIntoConstraints = false
+    
+    return view
+  }()
+  
   let categoryFiltersCollection: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -44,10 +58,16 @@ class SearchView: UIView {
       CategoryFilterCell.self,
       forCellWithReuseIdentifier: CategoryFilterCell.reuseIdentifier
     )
+    
+    foodItemsCollection.register(
+      FoodItemCell.self,
+      forCellWithReuseIdentifier: FoodItemCell.reuseIdentifier
+    )
   }
   
   private func addSubviews() {
     addSubview(categoryFiltersCollection)
+    addSubview(foodItemsCollection)
   }
   
   private func setupConstraints() {
@@ -55,7 +75,12 @@ class SearchView: UIView {
       categoryFiltersCollection.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
       categoryFiltersCollection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
       categoryFiltersCollection.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-      categoryFiltersCollection.heightAnchor.constraint(equalToConstant: 45)
+      categoryFiltersCollection.heightAnchor.constraint(equalToConstant: 45),
+      
+      foodItemsCollection.topAnchor.constraint(equalTo: categoryFiltersCollection.bottomAnchor, constant: 16),
+      foodItemsCollection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+      foodItemsCollection.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+      foodItemsCollection.bottomAnchor.constraint(equalTo: self.bottomAnchor)
     ])
   }
 }

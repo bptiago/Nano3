@@ -15,7 +15,56 @@ class SearchViewController: UIViewController {
   let searchView = SearchView()
   let searchController = UISearchController(searchResultsController: nil)
   private let categoryFilters: [CategoryType] = [.all, .meals, .snacks, .drinks]
-
+  let foodItems: [FoodItem] = [
+    FoodItem(
+      image: UIImage(systemName: "fork.knife")!,
+      name: "Spaghetti Bolognese",
+      price: 32.90,
+      location: "Trattoria Bella Italia"
+    ),
+    FoodItem(
+      image: UIImage(systemName: "takeoutbag.and.cup.and.straw.fill")!,
+      name: "Cheeseburger Combo",
+      price: 24.50,
+      location: "Burger House"
+    ),
+    FoodItem(
+      image: UIImage(systemName: "cup.and.saucer.fill")!,
+      name: "Cappuccino",
+      price: 8.90,
+      location: "Café Central"
+    ),
+    FoodItem(
+      image: UIImage(systemName: "birthday.cake.fill")!,
+      name: "Chocolate Cake",
+      price: 15.00,
+      location: "Sweet Dreams Bakery"
+    ),
+    FoodItem(
+      image: UIImage(systemName: "leaf.fill")!,
+      name: "Vegan Salad",
+      price: 18.75,
+      location: "Green Bowl"
+    ),
+    FoodItem(
+      image: UIImage(systemName: "fish.fill")!,
+      name: "Grilled Salmon",
+      price: 42.00,
+      location: "Ocean View Restaurant"
+    ),
+    FoodItem(
+      image: UIImage(systemName: "wineglass.fill")!,
+      name: "Red Wine",
+      price: 27.50,
+      location: "Wine & Dine"
+    ),
+    FoodItem(
+      image: UIImage(systemName: "takeoutbag.and.cup.and.straw.fill")!,
+      name: "Sushi Combo",
+      price: 39.90,
+      location: "Tokyo Bites"
+    )
+  ]
   
   // MARK: - Lifecycle
   override func viewDidLoad() {
@@ -23,6 +72,10 @@ class SearchViewController: UIViewController {
     searchView.categoryFiltersCollection.delegate = self
     searchView.categoryFiltersCollection.dataSource = self
     searchView.categoryFiltersCollection.showsHorizontalScrollIndicator = false
+    
+    searchView.foodItemsCollection.delegate = self
+    searchView.foodItemsCollection.dataSource = self
+    searchView.foodItemsCollection.showsVerticalScrollIndicator = false
   }
   
   override func loadView() {
@@ -78,22 +131,38 @@ extension SearchViewController: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: CategoryFilterCell.reuseIdentifier,
-      for: indexPath
-    ) as? CategoryFilterCell else {
-      fatalError("Could not dequeue cell")
+    if collectionView == searchView.categoryFiltersCollection {
+      guard let cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: CategoryFilterCell.reuseIdentifier,
+        for: indexPath
+      ) as? CategoryFilterCell else {
+        fatalError("Could not dequeue cell")
+      }
+      
+      cell.configure(with: categoryFilters[indexPath.row])
+      
+      return cell
+    } else {
+      guard let cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: FoodItemCell.reuseIdentifier,
+        for: indexPath
+      ) as? FoodItemCell else {
+        fatalError("Could not dequeue cell")
+      }
+      
+      cell.configure(with: foodItems[indexPath.row])
+      
+      return cell
     }
-    
-    cell.configure(with: categoryFilters[indexPath.row])
-    
-    return cell
   }
-  
 }
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    print("oi")
+    if collectionView == searchView.categoryFiltersCollection {
+      // Filtro por tipo de comida
+    } else {
+      print("assda")
+    }
   }
 }
