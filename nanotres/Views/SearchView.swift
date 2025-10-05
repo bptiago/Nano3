@@ -78,14 +78,14 @@ class SearchView: UIView {
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      categoryFiltersCollection.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-      categoryFiltersCollection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+      categoryFiltersCollection.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: DesignToken.mediumSpacing),
+      categoryFiltersCollection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: DesignToken.borderSpacing),
       categoryFiltersCollection.trailingAnchor.constraint(equalTo: self.trailingAnchor),
       categoryFiltersCollection.heightAnchor.constraint(equalToConstant: 45),
       
-      foodItemsCollection.topAnchor.constraint(equalTo: categoryFiltersCollection.bottomAnchor, constant: 16),
-      foodItemsCollection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-      foodItemsCollection.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+      foodItemsCollection.topAnchor.constraint(equalTo: categoryFiltersCollection.bottomAnchor, constant: DesignToken.mediumSpacing),
+      foodItemsCollection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: DesignToken.borderSpacing),
+      foodItemsCollection.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: DesignToken.borderSpacingNeg),
       foodItemsCollection.bottomAnchor.constraint(equalTo: self.bottomAnchor)
     ])
   }

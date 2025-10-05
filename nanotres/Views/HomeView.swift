@@ -74,13 +74,13 @@ class HomeView: UIView {
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      categoryCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-      categoryCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      categoryCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+      categoryCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: DesignToken.mediumSpacing),
+      categoryCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: DesignToken.borderSpacing),
+      categoryCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: DesignToken.borderSpacingNeg),
       categoryCollectionView.heightAnchor.constraint(equalToConstant: 90),
 
-      foodCollectionView.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 16),
-      foodCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+      foodCollectionView.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: DesignToken.mediumSpacing),
+      foodCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: DesignToken.borderSpacing),
       foodCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
       foodCollectionView.bottomAnchor.constraint(equalTo: foodCollectionView.topAnchor, constant: 200)
     ])

@@ -79,10 +79,10 @@ class SortSheetView: UIView {
   
   private func setupConstraints() {
     NSLayoutConstraint.activate([
-      titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 32),
+      titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: DesignToken.largeSpacing),
       titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
       
-      stack.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+      stack.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: DesignToken.mediumSpacing),
       stack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
     ])
   }
